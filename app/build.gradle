@@ -16,13 +16,22 @@ android {
             abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
         }
     }
+    signingConfigs {
+        releaseConfig {
+            keyAlias 'zybl'
+            keyPassword '123456'
+            storeFile file('zybl.jks')
+            storePassword '123456'
+
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.releaseConfig
         }
     }
-
     //android studio默认so文件加载目录为:src/main/jniLibs
     //如在module的build.gradle按照如下方式,自定义了so文件加载目录请确保对应目录下只有armeabi目录
     //    sourceSets {
